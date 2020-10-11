@@ -16,7 +16,7 @@ This is a demo of [physically based rendering](https://en.wikipedia.org/wiki/Phy
 
 [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h): single header image loader
 
-PBR material texture from [freepbr.com](freepbr.com)
+PBR material texture from [freepbr.com](http://www.freepbr.com)
 
 HDR environment texture from [hdrlabs](http://www.hdrlabs.com/sibl/archive/)
 
