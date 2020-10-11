@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="shaders">
+      <UniqueIdentifier>{f32a2097-bfbf-4bc0-979c-cde34d7e85a5}</UniqueIdentifier>
+      <Extensions>vs;fs</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\glad.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Cubemap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Quad.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Cubemap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IBL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Quad.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\textures\awesomeface.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resources\textures\wall.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resources\textures\container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resources\textures\container2_diffuse.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resources\textures\container2_specular.png">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OpenGLPlayground.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shaders\simple.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\simple.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\phong.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\phong.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\light.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\light.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\skybox.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\skybox.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\reflection.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\reflection.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\refraction.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\refraction.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\depth.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\depth.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\explode.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\explode.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\explode.gs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\normal.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\normal.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\normal.gs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\phong_normal.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\phong_normal.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\pbr.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\pbr.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\equirectangular.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\equirectangular.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\prefilter.vs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\prefilter.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\brdf.fs">
+      <Filter>shaders</Filter>
+    </None>
+    <None Include="resources\shaders\brdf.vs">
+      <Filter>shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
