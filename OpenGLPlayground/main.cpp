@@ -85,6 +85,30 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         skyboxIndex = 3;
         break;
 
+    case GLFW_KEY_5:
+        skyboxIndex = 4;
+        break;
+
+    case GLFW_KEY_6:
+        skyboxIndex = 5;
+        break;
+
+    case GLFW_KEY_7:
+        skyboxIndex = 6;
+        break;
+
+    case GLFW_KEY_8:
+        skyboxIndex = 7;
+        break;
+
+    case GLFW_KEY_9:
+        skyboxIndex = 8;
+        break;
+
+    case GLFW_KEY_0:
+        skyboxIndex = 9;
+        break;
+
     default:
         break;
     }
@@ -194,16 +218,23 @@ int main()
     // resource loading
     stbi_set_flip_vertically_on_load(true);
     //Model backpack_model("resources/models/backpack/backpack.obj");
-    Texture albedo("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_albedo.png", TextureType::Albedo);
-    Texture normal("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_Normal-dx.png", TextureType::Normal);
-    Texture metallic("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_Metallic.png", TextureType::Metallic);
-    Texture roughness("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_Roughness.png", TextureType::Roughness);
-    Texture ao("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_ao.png", TextureType::AO);
-    IBL subway(
-        "resources/IBL/Subway_Lights/20_Subway_Lights_8k.jpg",
-        "resources/IBL/Subway_Lights/20_Subway_Lights_Env.hdr",
-        "resources/IBL/Subway_Lights/20_Subway_Lights_3k.hdr");
-
+    Texture albedo("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-albedo.png", TextureType::Albedo);
+    Texture normal("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-Normal-dx.png", TextureType::Normal);
+    Texture metallic("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-Metallic.png", TextureType::Metallic);
+    Texture roughness("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-Roughness.png", TextureType::Roughness);
+    Texture ao("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-ao.png", TextureType::AO);
+    IBL envMap[10] = {
+        {"resources/IBL/Alexs_Apartment/Alexs_Apt_8k.jpg", "resources/IBL/Alexs_Apartment/Alexs_Apt_Env.hdr", "resources/IBL/Alexs_Apartment/Alexs_Apt_2k.hdr"},
+        {"resources/IBL/Desert_Highway/Road_to_MonumentValley_8k.jpg", "resources/IBL/Desert_Highway/Road_to_MonumentValley_Env.hdr", "resources/IBL/Desert_Highway/Road_to_MonumentValley_Ref.hdr"},
+        {"resources/IBL/empty_room/Hires_pano.jpg", "resources/IBL/empty_room/diffuse.hdr", "resources/IBL/empty_room/medium_res.hdr"},
+        {"resources/IBL/snow_machine/test8_Bg.jpg", "resources/IBL/snow_machine/test8_Env.hdr", "resources/IBL/snow_machine/test8_Ref.hdr"},
+        {"resources/IBL/Subway_Lights/20_Subway_Lights_8k.jpg", "resources/IBL/Subway_Lights/20_Subway_Lights_Env.hdr", "resources/IBL/Subway_Lights/20_Subway_Lights_3k.hdr"},
+        {"resources/IBL/Tokyo_BigSight/Tokyo_BigSight_8k.jpg", "resources/IBL/Tokyo_BigSight/Tokyo_BigSight_Env.hdr", "resources/IBL/Tokyo_BigSight/Tokyo_BigSight_3k.hdr"},
+        {"resources/IBL/Walk_Of_Fame/Mans_Outside_8k_TMap.jpg", "resources/IBL/Walk_Of_Fame/Mans_Outside_Env.hdr", "resources/IBL/Walk_Of_Fame/Mans_Outside_2k.hdr"},
+        {"resources/IBL/Ueno-Shrine/03-Ueno-Shrine_8k.jpg", "resources/IBL/Ueno-Shrine/03-Ueno-Shrine_Env.hdr", "resources/IBL/Ueno-Shrine/03-Ueno-Shrine_3k.hdr"},
+        {"resources/IBL/Circus_Backstage/Circus_Backstage_8k.jpg", "resources/IBL/Circus_Backstage/Circus_Backstage_Env.hdr", "resources/IBL/Circus_Backstage/Circus_Backstage_3k.hdr"},
+        {"resources/IBL/QueenMary_Chimney/QueenMary_Chimney_8k.jpg", "resources/IBL/QueenMary_Chimney/QueenMary_Chimney_Env.hdr", "resources/IBL/QueenMary_Chimney/QueenMary_Chimney_Ref.hdr"}
+    };
 
     //Cubemap envMap[4] = { {alexApartment},  {backlot}, {emptyroom}, {office} };
 
@@ -270,8 +301,8 @@ int main()
         shader.SetInt("aoMap", 7);
 
         // 3. bind textures
-        subway.diffuse.Bind(0);
-        subway.specular.Bind(1);
+        envMap[skyboxIndex].diffuse.Bind(0);
+        envMap[skyboxIndex].specular.Bind(1);
         brdfLUT.Bind(2);
         albedo.Bind(3);
         normal.Bind(4);
@@ -294,7 +325,7 @@ int main()
         }
 
         // draw skybox last since it has maximum depth
-        Skybox::Draw(subway.background, skyboxShader, cam);
+        Skybox::Draw(envMap[skyboxIndex].background, skyboxShader, cam);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
