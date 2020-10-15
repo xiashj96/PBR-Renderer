@@ -1,8 +1,12 @@
 # PBR Render
 
-This is a demo of [physically based rendering](https://en.wikipedia.org/wiki/Physically_based_rendering) written in C++ and OpenGL. A lot of the source codes are adapted from the popular OpenGL tutorial website [learnopengl.com](https://learnopengl.com/). A graphics card that supports OpenGL 3.3+ is required to run this demo, so be sure to update your graphics driver if you run into any issue.
+This is a demo of [physically based rendering](https://en.wikipedia.org/wiki/Physically_based_rendering) written in C++ and OpenGL. A lot of the source codes are adapted from the popular OpenGL tutorial website [learnopengl.com](https://learnopengl.com/). A graphics card that supports OpenGL 3.3+ is required to run this demo, so be sure to update your graphics driver if you run into any issue. Below are several screenshots of the program.
 
-![screenshot](screenshot.jpg)
+![](screenshot_1.png)
+
+![](screenshot_2.png)
+
+![](screenshot_3.png)
 
 ## Libraries and resources used
 
@@ -27,6 +31,8 @@ W/A/S/D and mouse:  navigate through the scene as you would in a FPS game
 Mouse wheel: zoom in/out
 
 Q/E: rotate object of interest
+
+0-9: switch between different environment maps
 
 N: toggle normal shader
 
