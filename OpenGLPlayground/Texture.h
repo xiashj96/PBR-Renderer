@@ -10,19 +10,21 @@ unsigned int LoadTextureHDR(const char* path);
 unsigned int LoadCubemap(std::vector<std::string> faces);
 
 enum class TextureType {
+	Generic,
 	Albedo,
 	Metallic,
 	Roughness,
 	Normal,
 	AO,
-	HDR
+	HDR,
+	BRDF
 };
 
 
 class Texture
 {
 public:
-	static Texture GetBrdfLUT();
+	static Texture& GetBrdfLUT();
 	std::string getFilename() const { return filename; }
 	TextureType getType() const { return type; }
 
@@ -43,13 +45,25 @@ public:
 		}
 	}
 
+	// since Texture is a resource management class, we want to disable copy construction, but implement move semantics
+	Texture(Texture const&) = delete;
+	Texture& operator=(const Texture&) = delete;
+	Texture(Texture&& other) noexcept :id(other.id), type(other.type), filename(other.filename) {}
+
 	void Bind(int textureUnit) const {
-		glActiveTexture(GL_TEXTURE0 + textureUnit); // activate proper texture unit (0~31)
-		glBindTexture(GL_TEXTURE_2D, id);
+		if (id)
+		{
+			glActiveTexture(GL_TEXTURE0 + textureUnit); // activate proper texture unit (0~31)
+			glBindTexture(GL_TEXTURE_2D, id);
+		}
+		else {
+			std::cout << "trying to bind uninitialized texture" << std::endl;
+		}
 	}
 
-	Texture(unsigned int id) : id(id) {}
-
+	Texture(unsigned int id = 0, TextureType type = TextureType::Generic) : id(id), type(type) {}
+	~Texture() { if (id)	glDeleteTextures(1, &id);}
+	 
 private:
 	unsigned int id;
 	TextureType type;

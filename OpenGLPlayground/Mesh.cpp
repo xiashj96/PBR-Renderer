@@ -18,7 +18,7 @@ void Mesh::Draw(const Shader& shader) const
 
         // set texture uniforms
         string uniformName = "material.";
-        TextureType type = textures[i].getType();
+        TextureType type = textures[i]->getType();
         if (type == TextureType::Albedo)
             uniformName.append(TextureTypeStrings[static_cast<int>(type)] + std::to_string(diffuseNr++));
         else if (type == TextureType::Metallic)
@@ -27,7 +27,7 @@ void Mesh::Draw(const Shader& shader) const
             uniformName.append(TextureTypeStrings[static_cast<int>(type)] + std::to_string(normalNr++));
 
         shader.SetInt(uniformName, i);
-        textures[i].Bind(i);
+        textures[i]->Bind(i);
     }
     glActiveTexture(GL_TEXTURE0);
 

@@ -21,11 +21,22 @@ public:
 		id = EquirectanglarToCubemap(equirectangular);
 	}
 
-	Cubemap(unsigned int id) :id(id) {}
+	Cubemap(unsigned int id = 0) :id(id) {}
+
+	Cubemap(Cubemap const&) = delete;
+	Cubemap& operator=(const Cubemap&) = delete;
+	Cubemap(Cubemap&& other) noexcept:id(other.id) {}
+	~Cubemap() { if (id) glDeleteTextures(1, &id); }
 
 	void Bind(int textureUnit) const {
-		glActiveTexture(GL_TEXTURE0 + textureUnit);
-		glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+		if (id)
+		{
+			glActiveTexture(GL_TEXTURE0 + textureUnit);
+			glBindTexture(GL_TEXTURE_CUBE_MAP, id);
+		}
+		else {
+			std::cout << "trying to bind uninitialized cubemap" << std::endl;
+		}
 	}
 
 	Cubemap GetPrefiltered() const {

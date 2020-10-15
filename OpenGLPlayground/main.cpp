@@ -27,8 +27,8 @@ float lastY;
 bool firstMouse = true;
 
 // screen dimension
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1280;
+const unsigned int SCR_HEIGHT = 720;
 
 // model rotation speed
 const float degreesPerSecond = 90.0f;
@@ -199,10 +199,10 @@ int main()
     Texture metallic("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_Metallic.png", TextureType::Metallic);
     Texture roughness("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_Roughness.png", TextureType::Roughness);
     Texture ao("resources/textures/broken_down_concrete1_ue/broken_down_concrete1_ao.png", TextureType::AO);
-    IBL subway{
-        {Texture{"resources/IBL/Subway_Lights/20_Subway_Lights_8k.jpg", TextureType::Albedo}},
-        {Texture{"resources/IBL/Subway_Lights/20_Subway_Lights_Env.hdr", TextureType::HDR}},
-        {Texture{"resources/IBL/Subway_Lights/20_Subway_Lights_3k.hdr", TextureType::HDR}} };
+    IBL subway(
+        "resources/IBL/Subway_Lights/20_Subway_Lights_8k.jpg",
+        "resources/IBL/Subway_Lights/20_Subway_Lights_Env.hdr",
+        "resources/IBL/Subway_Lights/20_Subway_Lights_3k.hdr");
 
 
     //Cubemap envMap[4] = { {alexApartment},  {backlot}, {emptyroom}, {office} };
@@ -225,7 +225,7 @@ int main()
     //glEnable(GL_MULTISAMPLE);
 
     // initialize brdfLUT
-    Texture::GetBrdfLUT();
+    Texture& brdfLUT = Texture::GetBrdfLUT();
 
     //before rendering, configure the viewport to the original framebuffer's screen dimensions
     int scrWidth, scrHeight;
@@ -272,7 +272,7 @@ int main()
         // 3. bind textures
         subway.diffuse.Bind(0);
         subway.specular.Bind(1);
-        Texture::GetBrdfLUT().Bind(2);
+        brdfLUT.Bind(2);
         albedo.Bind(3);
         normal.Bind(4);
         metallic.Bind(5);

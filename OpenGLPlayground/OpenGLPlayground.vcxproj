@@ -34,7 +34,6 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="Cubemap.h" />
-    <ClInclude Include="GameObject.h" />
     <ClInclude Include="IBL.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Material.h" />

@@ -77,12 +77,13 @@ unsigned int EquirectangularToCubemap(unsigned int texture)
 	return 0;
 }
 
-Texture Texture::GetBrdfLUT()
+Texture& Texture::GetBrdfLUT()
 {
 	static Shader brdfShader("resources/shaders/brdf.vs", "resources/shaders/brdf.fs");
-	static unsigned int brdfLUTTexture = 0;
-	if (brdfLUTTexture == 0)
+	static Texture BrdfLUT;
+	if (BrdfLUT.id == 0)
 	{
+		unsigned int brdfLUTTexture;
 		glGenTextures(1, &brdfLUTTexture);
 		// setup framebuffer
 		unsigned int captureFBO;
@@ -116,10 +117,9 @@ Texture Texture::GetBrdfLUT()
 		Quad::GetInstance().Draw();
 			
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		return brdfLUTTexture;
+		BrdfLUT.id = brdfLUTTexture;
+		BrdfLUT.type = TextureType::BRDF;
 	}
-	else {
-		return brdfLUTTexture;
-	}
-	
+
+	return BrdfLUT;
 }
