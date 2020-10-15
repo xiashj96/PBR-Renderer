@@ -2,11 +2,11 @@
 
 This is a demo of [physically based rendering](https://en.wikipedia.org/wiki/Physically_based_rendering) written in C++ and OpenGL. A lot of the source codes are adapted from the popular OpenGL tutorial website [learnopengl.com](https://learnopengl.com/). A graphics card that supports OpenGL 3.3+ is required to run this demo, so be sure to update your graphics driver if you run into any issue. Below are several screenshots of the program.
 
-![](screenshot_1.png)
+![](Screenshot_1.png)
 
-![](screenshot_2.png)
+![](Screenshot_2.png)
 
-![](screenshot_3.png)
+![](Screenshot_3.png)
 
 ## Libraries and resources used
 
