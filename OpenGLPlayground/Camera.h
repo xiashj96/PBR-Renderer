@@ -10,6 +10,10 @@ enum Camera_Movement {
     RIGHT
 };
 
+const float MovementSpeedFast = 2.5f;
+const float MovementSpeedSlow = 1.0f;
+
+
 class Camera
 {
 public:
@@ -19,14 +23,15 @@ public:
     float Pitch;
 
     // camera movement options
-    const float MovementSpeed = 2.5f;
+    float MovementSpeed = MovementSpeedSlow;
     const float MouseSensitivity = 0.1f;
 
     // view frustum
     float Aspect;
     float FOV;
     const float Near = 0.1f;
-    const float Far = 100.0f;
+    const float Far = 1000.0f;
+
 
     // constructor with vectors
     Camera(float aspect, float fov = 45.0f, glm::vec3 position = glm::vec3(0.0f, 1.0f, 3.0f), float yaw = -90.f, float pitch = 0.f):

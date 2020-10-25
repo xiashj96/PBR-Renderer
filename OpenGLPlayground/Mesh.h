@@ -16,7 +16,7 @@ struct Vertex {
 class Mesh
 {
 public:
-    Mesh(const vector<Vertex>& vertices, const vector<unsigned int>& indices, const vector<Texture*>& textures)
+    Mesh(const vector<Vertex>& vertices, const vector<unsigned int>& indices, const vector<Texture>& textures)
         :vertices(vertices), indices(indices), textures(textures)
     {
         setupMesh();
@@ -30,7 +30,7 @@ private:
     // mesh data
     vector<Vertex>       vertices;
     vector<unsigned int> indices;
-    vector<Texture*>     textures;
+    vector<Texture>     textures;
 
     unsigned int VAO, VBO, EBO;
 };

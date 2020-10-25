@@ -23,11 +23,6 @@ public:
 
 	Cubemap(unsigned int id = 0) :id(id) {}
 
-	Cubemap(Cubemap const&) = delete;
-	Cubemap& operator=(const Cubemap&) = delete;
-	Cubemap(Cubemap&& other) noexcept:id(other.id) {}
-	~Cubemap() { if (id) glDeleteTextures(1, &id); }
-
 	void Bind(int textureUnit) const {
 		if (id)
 		{

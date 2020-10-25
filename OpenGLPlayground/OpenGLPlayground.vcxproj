@@ -48,46 +48,200 @@
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\textures\awesomeface.png" />
-    <Image Include="resources\textures\container.jpg" />
-    <Image Include="resources\textures\container2_diffuse.png" />
-    <Image Include="resources\textures\container2_specular.png" />
-    <Image Include="resources\textures\wall.jpg" />
+    <None Include="assimp-vc142-mtd.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Alexs_Apartment\Alexs_Apt_2k.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Alexs_Apartment\Alexs_Apt_Env.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Circus_Backstage\Circus_Backstage_3k.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Circus_Backstage\Circus_Backstage_Env.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Desert_Highway\Road_to_MonumentValley_Env.hdr" />
+    <None Include="resources\IBL\Desert_Highway\Road_to_MonumentValley_Ref.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\empty_room\diffuse.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\empty_room\medium_res.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\QueenMary_Chimney\QueenMary_Chimney_Env.hdr" />
+    <None Include="resources\IBL\QueenMary_Chimney\QueenMary_Chimney_Ref.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\snow_machine\test8_Env.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\snow_machine\test8_Ref.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Subway_Lights\20_Subway_Lights_3k.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Subway_Lights\20_Subway_Lights_Env.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Tokyo_BigSight\Tokyo_BigSight_3k.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Tokyo_BigSight\Tokyo_BigSight_Env.hdr" />
+    <None Include="resources\IBL\Ueno-Shrine\03-Ueno-Shrine_3k.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Ueno-Shrine\03-Ueno-Shrine_Env.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Walk_Of_Fame\Mans_Outside_2k.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\IBL\Walk_Of_Fame\Mans_Outside_Env.hdr">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\models\Cerberus\Cerberus.bin">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\models\Cerberus\Cerberus.gltf">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\brdf.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\brdf.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\depth.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\depth.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\equirectangular.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\equirectangular.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\explode.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\explode.gs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\explode.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\light.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\light.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\normal.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\normal.gs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\normal.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\pbr.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\pbr.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\phong.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\phong.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\phong_normal.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\phong_normal.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\prefilter.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\prefilter.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\reflection.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\reflection.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\refraction.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\refraction.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\simple.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\simple.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\skybox.fs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="resources\shaders\skybox.vs">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="OpenGLPlayground.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="resources\shaders\brdf.fs" />
-    <None Include="resources\shaders\brdf.vs" />
-    <None Include="resources\shaders\depth.fs" />
-    <None Include="resources\shaders\depth.vs" />
-    <None Include="resources\shaders\equirectangular.fs" />
-    <None Include="resources\shaders\equirectangular.vs" />
-    <None Include="resources\shaders\explode.fs" />
-    <None Include="resources\shaders\explode.gs" />
-    <None Include="resources\shaders\explode.vs" />
-    <None Include="resources\shaders\light.fs" />
-    <None Include="resources\shaders\light.vs" />
-    <None Include="resources\shaders\normal.fs" />
-    <None Include="resources\shaders\normal.gs" />
-    <None Include="resources\shaders\normal.vs" />
-    <None Include="resources\shaders\pbr.fs" />
-    <None Include="resources\shaders\pbr.vs" />
-    <None Include="resources\shaders\phong.fs" />
-    <None Include="resources\shaders\phong.vs" />
-    <None Include="resources\shaders\phong_normal.fs" />
-    <None Include="resources\shaders\phong_normal.vs" />
-    <None Include="resources\shaders\prefilter.fs" />
-    <None Include="resources\shaders\prefilter.vs" />
-    <None Include="resources\shaders\reflection.fs" />
-    <None Include="resources\shaders\reflection.vs" />
-    <None Include="resources\shaders\refraction.fs" />
-    <None Include="resources\shaders\refraction.vs" />
-    <None Include="resources\shaders\simple.fs" />
-    <None Include="resources\shaders\simple.vs" />
-    <None Include="resources\shaders\skybox.fs" />
-    <None Include="resources\shaders\skybox.vs" />
+    <Image Include="resources\IBL\Alexs_Apartment\Alexs_Apt_8k.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\Circus_Backstage\Circus_Backstage_8k.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\Desert_Highway\Road_to_MonumentValley_8k.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\empty_room\Hires_pano.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\QueenMary_Chimney\QueenMary_Chimney_8k.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\snow_machine\test8_Bg.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\Subway_Lights\20_Subway_Lights_8k.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\Tokyo_BigSight\Tokyo_BigSight_8k.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\Ueno-Shrine\03-Ueno-Shrine_8k.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\IBL\Walk_Of_Fame\Mans_Outside_8k_TMap.jpg">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\models\Cerberus\Cerberus_A.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\models\Cerberus\Cerberus_AO-Cerberus_R-Cerberus_M.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
+    <Image Include="resources\models\Cerberus\Cerberus_N.png">
+      <DeploymentContent>true</DeploymentContent>
+    </Image>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -95,6 +249,7 @@
     <ProjectGuid>{b5ca9aa0-7c2e-4981-b439-3b47ffe3ab6a}</ProjectGuid>
     <RootNamespace>OpenGLPlayground</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>PBR Renderer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -208,11 +363,12 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;assimp.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

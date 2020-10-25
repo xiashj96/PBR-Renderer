@@ -17,6 +17,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="资源文件\models">
+      <UniqueIdentifier>{dd0da4e8-b2ad-4fcf-9dee-e40b23def1aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\IBL">
+      <UniqueIdentifier>{f0247832-bced-4286-bfb2-9dbd06b8140f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\glad.c">
@@ -96,28 +102,6 @@
     <ClInclude Include="Model.h">
       <Filter>头文件</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="resources\textures\awesomeface.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resources\textures\wall.jpg">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resources\textures\container.jpg">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resources\textures\container2_diffuse.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resources\textures\container2_specular.png">
-      <Filter>资源文件</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="OpenGLPlayground.rc">
-      <Filter>资源文件</Filter>
-    </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\simple.fs">
@@ -210,5 +194,113 @@
     <None Include="resources\shaders\brdf.vs">
       <Filter>shaders</Filter>
     </None>
+    <None Include="assimp-vc142-mtd.dll" />
+    <None Include="resources\models\Cerberus\Cerberus.bin">
+      <Filter>资源文件\models</Filter>
+    </None>
+    <None Include="resources\models\Cerberus\Cerberus.gltf">
+      <Filter>资源文件\models</Filter>
+    </None>
+    <None Include="resources\IBL\Alexs_Apartment\Alexs_Apt_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Alexs_Apartment\Alexs_Apt_2k.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Circus_Backstage\Circus_Backstage_3k.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Circus_Backstage\Circus_Backstage_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Desert_Highway\Road_to_MonumentValley_Ref.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\empty_room\medium_res.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\empty_room\diffuse.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\QueenMary_Chimney\QueenMary_Chimney_Ref.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\snow_machine\test8_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\snow_machine\test8_Ref.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Subway_Lights\20_Subway_Lights_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Subway_Lights\20_Subway_Lights_3k.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Tokyo_BigSight\Tokyo_BigSight_3k.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Ueno-Shrine\03-Ueno-Shrine_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Ueno-Shrine\03-Ueno-Shrine_3k.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Walk_Of_Fame\Mans_Outside_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Walk_Of_Fame\Mans_Outside_2k.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Desert_Highway\Road_to_MonumentValley_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\QueenMary_Chimney\QueenMary_Chimney_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+    <None Include="resources\IBL\Tokyo_BigSight\Tokyo_BigSight_Env.hdr">
+      <Filter>资源文件\IBL</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\models\Cerberus\Cerberus_A.png">
+      <Filter>资源文件\models</Filter>
+    </Image>
+    <Image Include="resources\models\Cerberus\Cerberus_AO-Cerberus_R-Cerberus_M.png">
+      <Filter>资源文件\models</Filter>
+    </Image>
+    <Image Include="resources\models\Cerberus\Cerberus_N.png">
+      <Filter>资源文件\models</Filter>
+    </Image>
+    <Image Include="resources\IBL\Alexs_Apartment\Alexs_Apt_8k.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\Circus_Backstage\Circus_Backstage_8k.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\Desert_Highway\Road_to_MonumentValley_8k.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\empty_room\Hires_pano.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\QueenMary_Chimney\QueenMary_Chimney_8k.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\snow_machine\test8_Bg.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\Subway_Lights\20_Subway_Lights_8k.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\Tokyo_BigSight\Tokyo_BigSight_8k.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\Ueno-Shrine\03-Ueno-Shrine_8k.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
+    <Image Include="resources\IBL\Walk_Of_Fame\Mans_Outside_8k_TMap.jpg">
+      <Filter>资源文件\IBL</Filter>
+    </Image>
   </ItemGroup>
 </Project>

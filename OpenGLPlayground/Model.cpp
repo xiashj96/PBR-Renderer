@@ -1,53 +1,7 @@
 #include "Model.h"
+#include <assimp/pbrmaterial.h>
 #include <stb_image.h>
 
-unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false)
-{
-	string filename = string(path);
-	filename = directory + '/' + filename;
-
-	unsigned int textureID;
-	glGenTextures(1, &textureID);
-
-	int width, height, nrComponents;
-	unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrComponents, 0);
-	if (data)
-	{
-		GLenum internalformat, format;
-		if (nrComponents == 1)
-		{
-			internalformat = format = GL_RED;
-		}
-		else if (nrComponents == 4)
-		{
-			internalformat = (gamma) ? GL_SRGB_ALPHA : GL_RGBA;
-			format = GL_RGBA;
-		}
-		else
-		{
-			internalformat = (gamma) ? GL_SRGB : GL_RGB;
-			format = GL_RGB;
-		}
-
-		glBindTexture(GL_TEXTURE_2D, textureID);
-		glTexImage2D(GL_TEXTURE_2D, 0, internalformat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		stbi_image_free(data);
-	}
-	else
-	{
-		std::cout << "Texture failed to load at path: " << path << std::endl;
-		stbi_image_free(data);
-	}
-
-	return textureID;
-}
 
 void Model::Draw(const Shader& shader) const
 {
@@ -60,7 +14,8 @@ void Model::Draw(const Shader& shader) const
 void Model::loadModel(string path)
 {
 	Assimp::Importer importer;
-	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace);
+	// we don't care about the scene graph of the original model
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_PreTransformVertices);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -91,7 +46,7 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 {
 	vector<Vertex> vertices;
 	vector<unsigned int> indices;
-	vector<Texture*> textures;
+	vector<Texture> textures;
 
 	// process vertex positions, normals and texture coordinates
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
@@ -131,22 +86,22 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
-		vector<Texture*> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-		vector<Texture*> specularMaps = loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-		vector<Texture*> normalMaps = loadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
-		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-		vector<Texture*> ambientMaps = loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_ambient");
-		textures.insert(textures.end(), ambientMaps.begin(), ambientMaps.end());
+		vector<Texture> albedoMap = loadMaterialTextures(material, aiTextureType_DIFFUSE);
+		textures.insert(textures.end(), albedoMap.begin(), albedoMap.end());
+		vector<Texture> normalMap = loadMaterialTextures(material, aiTextureType_NORMALS);
+		textures.insert(textures.end(), normalMap.begin(), normalMap.end());
+		vector<Texture> ormMap = loadMaterialTextures(material, aiTextureType_UNKNOWN); //ORM maps: occlusion, roughness, metallic
+		textures.insert(textures.end(), ormMap.begin(), ormMap.end());
+		vector<Texture> emissionMap = loadMaterialTextures(material, aiTextureType_EMISSIVE); //ORM maps: occlusion, roughness, metallic
+		textures.insert(textures.end(), emissionMap.begin(), emissionMap.end());
 	}
 
 	return Mesh(vertices, indices, textures);
 }
 
-vector<Texture*> Model::loadMaterialTextures(aiMaterial* material, aiTextureType type, string typeName)
+vector<Texture> Model::loadMaterialTextures(aiMaterial* material, aiTextureType type)
 {
-	vector<Texture*> textures;
+	vector<Texture> textures;
 	for (unsigned int i = 0; i < material->GetTextureCount(type); i++)
 	{
 		aiString str;
@@ -154,9 +109,9 @@ vector<Texture*> Model::loadMaterialTextures(aiMaterial* material, aiTextureType
 		bool skip = false;
 		for (unsigned int j = 0; j < textures_loaded.size(); j++)
 		{
-			if (std::strcmp(textures_loaded[j].getFilename().c_str(), str.C_Str()) == 0)
+ 			if (std::strcmp(textures_loaded[j].GetFilename().c_str(), str.C_Str()) == 0)
 			{
-				textures.push_back(&(textures_loaded[j]));
+				textures.push_back(textures_loaded[j]);
 				skip = true;
 				break;
 			}
@@ -164,8 +119,24 @@ vector<Texture*> Model::loadMaterialTextures(aiMaterial* material, aiTextureType
 		if (!skip)
 		{   // if texture hasn't been loaded already, load it
 			string path = directory + '/' + string(str.C_Str());
-			textures_loaded.emplace_back(path, TextureType::Generic); // construct new texture in place
-			textures.push_back(&(textures_loaded.back()));
+			TextureType texture_type;
+			switch (type)
+			{
+			case aiTextureType_DIFFUSE:
+				texture_type = TextureType::Albedo;
+				break;
+			case aiTextureType_NORMALS:
+				texture_type = TextureType::Normal;
+				break;
+			case aiTextureType_EMISSIVE:
+				texture_type = TextureType::Emissive;
+				break;
+			default:
+				texture_type = TextureType::ORM;
+				break;
+			}
+			textures_loaded.emplace_back(path, texture_type); // construct new texture in place
+			textures.push_back(textures_loaded.back());
 		}
 	}
 	return textures;

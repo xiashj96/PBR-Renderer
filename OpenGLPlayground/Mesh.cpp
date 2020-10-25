@@ -2,32 +2,10 @@
 
 void Mesh::Draw(const Shader& shader) const
 {
-    unsigned int diffuseNr = 1;
-    unsigned int specularNr = 1;
-    unsigned int normalNr = 1;
     for (unsigned int i = 0; i < textures.size(); i++)
     {
-        std::string TextureTypeStrings[6] = {
-            "texture_diffuse",
-            "texture_specular",
-            "texture_normal",
-            "texture_roughness",
-            "texture_ambient",
-            "texture_irridiance"
-        };
-
         // set texture uniforms
-        string uniformName = "material.";
-        TextureType type = textures[i]->getType();
-        if (type == TextureType::Albedo)
-            uniformName.append(TextureTypeStrings[static_cast<int>(type)] + std::to_string(diffuseNr++));
-        else if (type == TextureType::Metallic)
-            uniformName.append(TextureTypeStrings[static_cast<int>(type)] + std::to_string(specularNr++));
-        else if (type == TextureType::Normal)
-            uniformName.append(TextureTypeStrings[static_cast<int>(type)] + std::to_string(normalNr++));
-
-        shader.SetInt(uniformName, i);
-        textures[i]->Bind(i);
+        textures[i].Bind(i+3, shader);
     }
     glActiveTexture(GL_TEXTURE0);
 

@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
 #include "Shader.h"
 #include "Camera.h"
 #include "Cube.h"
@@ -16,6 +17,7 @@
 #include "Skybox.h"
 #include "Texture.h"
 #include "IBL.h"
+#include "Model.h"
 
 // timing
 float deltaTime = 0.0f;	// Time between current frame and last frame
@@ -41,6 +43,13 @@ bool LineMode = false;
 int skyboxIndex = 0;
 
 Camera cam((float)SCR_WIDTH / (float)SCR_HEIGHT);
+Light lights[4] = {
+    {glm::vec3(0.0f), glm::vec3(0.0f)},
+    {glm::vec3(0.0f), glm::vec3(0.0f)},
+    {glm::vec3(0.0f), glm::vec3(0.0f)},
+    {glm::vec3(0.0f), glm::vec3(0.0f)}
+}; // all lights turned off by default
+unsigned int lightIndex = 0;
 Transform mainObj;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -52,11 +61,19 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     bool pressed = (action != GLFW_RELEASE);
+    bool shifted = (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
     switch (key)
     {
     case GLFW_KEY_ESCAPE:
         if (pressed)
             glfwSetWindowShouldClose(window, true);
+        break;
+
+    case GLFW_KEY_LEFT_SHIFT:
+        if (pressed)
+            cam.MovementSpeed = MovementSpeedFast;
+        else
+            cam.MovementSpeed = MovementSpeedSlow;
         break;
 
     case GLFW_KEY_L:
@@ -107,6 +124,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
     case GLFW_KEY_0:
         skyboxIndex = 9;
+        break;
+
+    case GLFW_KEY_SPACE:
+        if (pressed)
+            if (shifted)
+                for (int i = 0; i < 4; ++i)
+                {
+                    lights[i] = Light(glm::vec3(0.0f), glm::vec3(0.0f));
+                }
+            else
+                lights[(lightIndex++) % 4] = Light(cam.GetPosition(), glm::vec3(1.0f));
         break;
 
     default:
@@ -176,7 +204,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    //glfwWindowHint(GLFW_SAMPLES, 4);
+    glfwWindowHint(GLFW_SAMPLES, 4);
 
     // GLFW window creation
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "PBR Renderer", NULL, NULL);
@@ -203,26 +231,24 @@ int main()
     }
 
     // compile and link shaders
-    Shader simpleShader("resources/shaders/simple.vs", "resources/shaders/simple.fs");
-    Shader phongShader("resources/shaders/phong.vs", "resources/shaders/phong.fs");
+    //Shader simpleShader("resources/shaders/simple.vs", "resources/shaders/simple.fs");
+    //Shader phongShader("resources/shaders/phong.vs", "resources/shaders/phong.fs");
     Shader lightShader("resources/shaders/light.vs", "resources/shaders/light.fs");
     Shader skyboxShader("resources/shaders/skybox.vs", "resources/shaders/skybox.fs");
-    Shader reflectionShader("resources/shaders/reflection.vs", "resources/shaders/reflection.fs");
-    Shader refractionShader("resources/shaders/refraction.vs", "resources/shaders/refraction.fs");
-    Shader depthShader("resources/shaders/depth.vs", "resources/shaders/depth.fs");
-    Shader explodeShader("resources/shaders/explode.vs", "resources/shaders/explode.fs", "resources/shaders/explode.gs");
+    //Shader reflectionShader("resources/shaders/reflection.vs", "resources/shaders/reflection.fs");
+    //Shader refractionShader("resources/shaders/refraction.vs", "resources/shaders/refraction.fs");
+    //Shader depthShader("resources/shaders/depth.vs", "resources/shaders/depth.fs");
+    //Shader explodeShader("resources/shaders/explode.vs", "resources/shaders/explode.fs", "resources/shaders/explode.gs");
     Shader normalShader("resources/shaders/normal.vs", "resources/shaders/normal.fs", "resources/shaders/normal.gs");
-    Shader phongShaderNormalMapping("resources/shaders/phong_normal.vs", "resources/shaders/phong_normal.fs");
+    //Shader phongShaderNormalMapping("resources/shaders/phong_normal.vs", "resources/shaders/phong_normal.fs");
     Shader pbrShader("resources/shaders/pbr.vs", "resources/shaders/pbr.fs");
 
     // resource loading
     stbi_set_flip_vertically_on_load(true);
-    //Model backpack_model("resources/models/backpack/backpack.obj");
-    Texture albedo("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-albedo.png", TextureType::Albedo);
-    Texture normal("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-Normal-dx.png", TextureType::Normal);
-    Texture metallic("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-Metallic.png", TextureType::Metallic);
-    Texture roughness("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-Roughness.png", TextureType::Roughness);
-    Texture ao("resources/textures/beaten-up-metal1-ue/beaten-up-metal1-ao.png", TextureType::AO);
+
+    // models
+    Model myObj("resources/models/Cerberus/Cerberus.gltf");
+    // environment Maps
     IBL envMap[10] = {
         {"resources/IBL/Alexs_Apartment/Alexs_Apt_8k.jpg", "resources/IBL/Alexs_Apartment/Alexs_Apt_Env.hdr", "resources/IBL/Alexs_Apartment/Alexs_Apt_2k.hdr"},
         {"resources/IBL/Desert_Highway/Road_to_MonumentValley_8k.jpg", "resources/IBL/Desert_Highway/Road_to_MonumentValley_Env.hdr", "resources/IBL/Desert_Highway/Road_to_MonumentValley_Ref.hdr"},
@@ -236,12 +262,6 @@ int main()
         {"resources/IBL/QueenMary_Chimney/QueenMary_Chimney_8k.jpg", "resources/IBL/QueenMary_Chimney/QueenMary_Chimney_Env.hdr", "resources/IBL/QueenMary_Chimney/QueenMary_Chimney_Ref.hdr"}
     };
 
-    //Cubemap envMap[4] = { {alexApartment},  {backlot}, {emptyroom}, {office} };
-
-    // scene definition
-    Light light(glm::vec3(1.2f, 1.0f, -2.0f));
-    //GameObject backpack(backpack_model);
-
     // enable depth testing (z-buffer)
     glEnable(GL_DEPTH_TEST);
 
@@ -249,16 +269,16 @@ int main()
     glEnable(GL_FRAMEBUFFER_SRGB);
 
     // enable back face culling
-    //glEnable(GL_CULL_FACE);
-    //glFrontFace(GL_CCW); // by default counter-clockwise vertex order is front-facing, except for skybox
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW); // by default counter-clockwise vertex order is front-facing, except for skybox
 
     // enable MSAA
-    //glEnable(GL_MULTISAMPLE);
+    glEnable(GL_MULTISAMPLE);
 
     // initialize brdfLUT
     Texture& brdfLUT = Texture::GetBrdfLUT();
 
-    //before rendering, configure the viewport to the original framebuffer's screen dimensions
+    // before rendering, configure the viewport to the original framebuffer's screen dimensions
     int scrWidth, scrHeight;
     glfwGetFramebufferSize(window, &scrWidth, &scrHeight);
     glViewport(0, 0, scrWidth, scrHeight);
@@ -276,7 +296,10 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // draw light
-        light.Draw(lightShader, cam);
+        for (int i = 0; i < 4; ++i)
+        {
+            lights[i].Draw(lightShader, cam);
+        }
 
         // draw object of interest
         // 1. use shader
@@ -288,31 +311,24 @@ int main()
         shader.SetMat4("view", cam.GetViewMatrix());
         shader.SetMat4("projection", cam.GetProjectionMatrix());
         shader.SetVec3("cameraPos", cam.GetPosition());
-        shader.SetVec3("light.position", light.Position);
-        shader.SetVec3("light.color", light.Color);
+        for (int i = 0; i < 4; ++i)
+        {
+            shader.SetVec3("lights[" + std::to_string(i)+"].position", lights[i].Position);
+            shader.SetVec3("lights[" + std::to_string(i) + "].color", lights[i].Color);
+        }
         shader.SetFloat("time", glfwGetTime());
         shader.SetInt("irradianceMap", 0);
         shader.SetInt("prefilterMap", 1);
         shader.SetInt("brdfLUT", 2);
-        shader.SetInt("albedoMap", 3);
-        shader.SetInt("normalMap", 4);
-        shader.SetInt("metallicMap", 5);
-        shader.SetInt("roughnessMap", 6);
-        shader.SetInt("aoMap", 7);
 
         // 3. bind textures
         envMap[skyboxIndex].diffuse.Bind(0);
         envMap[skyboxIndex].specular.Bind(1);
         brdfLUT.Bind(2);
-        albedo.Bind(3);
-        normal.Bind(4);
-        metallic.Bind(5);
-        roughness.Bind(6);
-        ao.Bind(7);
 
         // 4. draw call
         glPolygonMode(GL_FRONT_AND_BACK, (LineMode) ? GL_LINE : GL_FILL);
-            Sphere::GetInstance().Draw();
+        myObj.Draw(shader);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         if (DisplayNormal)
@@ -321,7 +337,7 @@ int main()
             normalShader.SetMat4("model", mainObj.GetModelMatrix());
             normalShader.SetMat4("view", cam.GetViewMatrix());
             normalShader.SetMat4("projection", cam.GetProjectionMatrix());
-            Sphere::GetInstance().Draw();
+            myObj.Draw(normalShader);
         }
 
         // draw skybox last since it has maximum depth

@@ -80,7 +80,7 @@ unsigned int EquirectangularToCubemap(unsigned int texture)
 Texture& Texture::GetBrdfLUT()
 {
 	static Shader brdfShader("resources/shaders/brdf.vs", "resources/shaders/brdf.fs");
-	static Texture BrdfLUT;
+	static Texture BrdfLUT(0, TextureType::BRDF);
 	if (BrdfLUT.id == 0)
 	{
 		unsigned int brdfLUTTexture;
