@@ -1,6 +1,6 @@
 # PBR Render
 
-This is a demo of [physically based rendering](https://en.wikipedia.org/wiki/Physically_based_rendering) written in C++ and OpenGL. A lot of the source codes are adapted from the popular OpenGL tutorial website [learnopengl.com](https://learnopengl.com/). A graphics card that supports OpenGL 3.3+ is required to run this demo, so be sure to update your graphics driver if you run into any issue. Below are several screenshots of the program.
+This is a demo of [physically based rendering](https://en.wikipedia.org/wiki/Physically_based_rendering) written in C++ and OpenGL. A lot of the source codes are adapted from the popular OpenGL tutorial website [learnopengl.com](https://learnopengl.com/). A graphics card that supports OpenGL 3.3+ is required to run this demo. Below are several screenshots of the program.
 
 ![](Screenshot_1.png)
 
@@ -20,13 +20,13 @@ This is a demo of [physically based rendering](https://en.wikipedia.org/wiki/Phy
 
 [stb_image](https://github.com/nothings/stb/blob/master/stb_image.h): single header image loader
 
-PBR material texture from [freepbr.com](http://www.freepbr.com)
+amazing PBR model and textures from http://artisaverb.info/PBT.html, converted to glTF format using [Blender's glTF exporter](https://docs.blender.org/manual/en/2.80/addons/io_scene_gltf2.html)
 
 HDR environment texture from [hdrlabs](http://www.hdrlabs.com/sibl/archive/)
 
 ## Interaction Guide
 
-W/A/S/D and mouse:  navigate through the scene as you would in a FPS game
+W/A/S/D and mouse:  navigate through the scene as you would in a FPS game, press down left shift to increase move speed
 
 Mouse wheel: zoom in/out
 
@@ -34,14 +34,16 @@ Q/E: rotate object of interest
 
 0-9: switch between different environment maps
 
-N: toggle normal shader
+space: place point light at camera (maximum number: 4)
+
+shift+space: clear all lights
+
+N: toggle normal visualization
 
 L: toggle wireframe/fill
 
-## TODO
+## TODO (if I have the time)
 
 - height map support (geometry shader)
-- load models created in 3D software
-- utilities to add one or more point lights in the scene
-- text rendering
+- text and GUI rendering
 
